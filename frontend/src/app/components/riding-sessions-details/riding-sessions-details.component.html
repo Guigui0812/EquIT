@@ -1,0 +1,50 @@
+<div class="bg-gray-800 text-white w-full p-4 rounded flex justify-center items-center">
+    <div class="bg-yellow-600 p-6 rounded-lg shadow-2xl max-w-4xl w-full">
+        <h2 class="text-center font-bold text-xl mb-4">Détails de la séance</h2>
+        <div class="grid grid-cols-2 gap-8">
+
+            <div class="space-y-6">
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <p class="font-bold text-white text-sm uppercase">Durée de la séance</p>
+                    <p class="text-lg">{{ridingSession.duration}} minutes</p>
+                </div>
+
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <p class="font-bold text-white text-sm uppercase">Capacité de la séance</p>
+                    <p class="text-lg">{{ridingSession.lessonCapacity}}</p>
+                </div>
+
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <p class="font-bold text-white text-sm uppercase">Niveau de la leçon</p>
+                    <p class="text-lg">{{ridingSession.lessonLevel}}</p>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <p class="font-bold text-white text-sm uppercase">Date de la séance</p>
+                    <p class="text-lg">{{ridingSession.date}}</p>
+                </div>
+
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <p class="font-bold text-white text-sm uppercase">Chevaux inscrits</p>
+                    <div class="space-y-2">
+                        <p class="text-lg" *ngFor="let horse of ridingSession.horses">{{horse.name}}</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <p class="font-bold text-white text-sm uppercase">Cavaliers inscrits</p>
+                    <div class="space-y-2">
+                        <p class="text-lg" *ngFor="let rider of ridingSession.riders">{{rider.firstName}} {{rider.lastName}}</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <p class="font-bold text-white text-sm uppercase">Moniteur</p>
+                    <p class="text-lg">{{ridingSession.teacher}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="flex flex-col md:flex-row h-full">
+
+    <div class="fixed h-full shadow-xl z-30 transition-all duration-500 overflow-auto bg-gray-800 mb-6"
+    [class]="showForm ? 'md:right-0 md:w-2/5' : 'md:-right-full md:w-2/5'">
+        <button class="text-right p-4 text-yellow-600 font-bold" (click)="showHorseRegistrationForm()">Fermer</button>
+        <app-horse-form *ngIf="showForm" class="p-4"></app-horse-form>
+    </div>
+
+    <ul class="flex flex-col mt-4 justify-center items-center transition-all duration-500" [class]="showForm ? 'md:w-3/5' : 'w-full'">
+
+        <h2 class="text-3xl text-center font-bold mt-4 text-yellow-600">Chevaux disponibles au club</h2>
+
+        <li class="flex p-4 rounded w-full md:w-3/4 mt-6 items-center justify-center">
+            <button class="bg-green-600 text-white p-2 rounded w-30 font-bold" (click)="showHorseRegistrationForm()">Créer un cheval</button>
+        </li>
+        
+        <li *ngFor="let horse of this.horseService.getAllHorses()" class="flex flex-col bg-gray-800 p-4 rounded w-full md:w-3/5 mt-6 items-center justify-center">
+            <div class="flex space-x-20 items-center w-full">
+                <div class="flex grow space-x-20 items-center">
+                    <img src="../../../assets/img/horse.png" alt="Horse" class="h-14">  
+                    <p class="text-white font-bold overflow-hidden text-ellipsis whitespace-nowrap">{{horse.name}}</p>
+                </div>
+                <div class="flex space-x-4">
+                    <button (click)="showHorseDetails(); viewHorse(horse.id)" class="bg-yellow-600 text-white p-2 rounded w-20 font-bold">Plus d'infos</button>
+                    <button (click)="this.horseService.removeHorse(horse.id)" class="bg-red-500 text-white p-2 rounded w-24 font-bold">Supprimer</button>
+                </div>
+            </div>
+            <app-horse-details [horseToView]="horse" *ngIf="horseId == horse.id" class="transform transition-all duration-500 ease-in-out w-full mt-2" [class]="showDetails ? 'hidden' : 'block'"></app-horse-details>
+        </li>
+    </ul>
+</div>

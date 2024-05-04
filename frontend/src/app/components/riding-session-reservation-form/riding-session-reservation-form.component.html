@@ -1,0 +1,17 @@
+<form [formGroup]="ridingSessionForm" (ngSubmit)="submitForm()">
+
+    <h2 class="text-lg font-semibold mb-2">Séance du {{ this.ridingSession.date }}</h2>
+    <p class="mb-2"><strong>Type: :</strong> {{ ridingSession.theme }}</p>
+    <p class="mb-2"><strong>Level :</strong> {{ ridingSession.difficulty }}</p>
+    <div class="flex flex-col mb-2">
+      <div>
+        <input type="checkbox" id="showHorses{{ridingSession.id}}" (change)="toggleAvailableHorsesDisplay()" class="mr-2">
+        <label for="showHorses{{ridingSession.id}}">Voir les chevaux disponibles</label>
+      </div>
+      <select formControlName="horse" [class]="showAvailableHorses ? 'block' : 'hidden'" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none mt-2">
+
+            <option *ngFor="let horse of this.availableHorses" [value]="horse.id">{{ horse.name }}</option>
+      </select>
+    </div>
+    <button type="submit" class="bg-yellow-500 text-white p-2 rounded font-bold">Réserver</button>
+</form>

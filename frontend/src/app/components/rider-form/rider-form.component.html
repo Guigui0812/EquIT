@@ -1,0 +1,38 @@
+<div class="bg-gray-800 min-h-screen flex items-center justify-center text-white flex-col">
+
+    <div class="text-center mb-8 mt-8">
+        <img src="../../../assets/img/horseman.png" alt="Logo" class="h-14 mx-auto">
+        <h1 class="text-3xl text-center font-bold mt-4 text-yellow-600">Rider Form</h1>
+    </div>
+    
+    <form [formGroup]="riderForm" (ngSubmit)="submitForm()" class="w-full max-w-lg">
+
+        <div class="flex flex-col mb-4">
+            <label for="firstName" class="mb-2">First Name</label>
+            <input type="text" id="firstName" formControlName="firstName" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none">
+        </div>
+
+        <div class="flex flex-col mb-4">
+            <label for="lastName" class="mb-2">Last Name</label>
+            <input type="text" id="lastName" formControlName="lastName" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none">
+        </div>
+
+        <div class="flex flex-col mb-4">
+            <label for="pseudo" class="mb-2">Pseudo</label>
+            <input type="text" id="pseudo" formControlName="pseudo" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none">
+        </div>
+        
+        <div class="flex flex-col mb-4">
+            <label for="level" class="mb-2">Level</label>
+            <select id="level" formControlName="level" class="p-2 rounded bg-gray-700 outline-none">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+                <option value="expert">Expert</option>
+            </select>
+        </div>
+
+        <button type="submit" class="w-full p-2 rounded bg-yellow-600 hover:bg-yellow-500 text-white font-bold">Submit</button>
+
+    </form>
+</div>

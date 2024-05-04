@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:13.2
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak-user
+      POSTGRES_PASSWORD: Password123!
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+  
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.1
+    depends_on:
+      - db
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: Password123!
+      KC_DB: postgres
+      KC_DB_USERNAME: keycloak-user
+      KC_DB_PASSWORD: Password123!
+      KC_DB_URL: jdbc:postgresql://db:5432/keycloak
+    ports:
+      - "8888:8080"
+    command: "start-dev"
+    
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Password123!
+      MYSQL_DATABASE: hipporp
+      MYSQL_USER: hipporp-user
+      MYSQL_PASSWORD: Password123!
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb:/var/lib/mysql

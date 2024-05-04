@@ -1,0 +1,66 @@
+<div class="bg-gray-800 min-h-screen flex items-center justify-center text-white flex-col">
+
+    <div class="text-center mb-8 mt-8">
+        <img src="../../../assets/img/horse.png" alt="Logo" class="h-14 mx-auto">
+        <h1 class="text-3xl text-center font-bold mt-4 text-yellow-600">Formulaire de création de cheval</h1>
+    </div>
+    
+    <form [formGroup]="horseForm" (ngSubmit)="submitForm()" class="w-full max-w-lg">
+        <div class="flex flex-col mb-4">
+            <label for="name" class="mb-2">Nom</label>
+            <input type="text" id="name" formControlName="name" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none" maxlength="50" pattern="[a-zA-Z ]*">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="sireNumber" class="mb-2">Numéro de sire</label>
+            <input type="number" id="sireNumber" formControlName="sireNumber" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none" maxlength="9">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="dateOfBirth" class="mb-2">Date de naissance</label>
+            <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="placeOfBirth" class="mb-2">Lieu de naissance</label>
+            <input type="text" id="placeOfBirth" formControlName="placeOfBirth" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none" maxlength="50" pattern="[a-zA-Z ]*">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="breed" class="mb-2">Breed</label>
+            <select id="breed" formControlName="breed" class="p-2 rounded bg-gray-700 outline-none">
+                <option value="Poney">Poney</option>
+                <option value="Apaloosa">Apaloosa</option>
+                <option value="Pur Sang">Pur Sang</option>
+                <option value="Shetland">Shetland</option>
+                <option value="Frisian">Frisian</option>
+                <option value="Quarter Horse">Quarter Horse</option>
+                <option value="Henson">Henson</option>
+            </select>
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="color" class="mb-2">Color</label>
+            <select id="color" formControlName="color" class="p-2 rounded bg-gray-700 outline-none">
+                <option value="Noir">Noir</option>
+                <option value="Blanc">Blanc</option>
+                <option value="Gris">Gris</option>
+                <option value="Bai">Bai</option>
+                <option value="Alezan">Alezan</option>
+                <option value="Isabelle">Isabelle</option>
+            </select>
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="height" class="mb-2">Taille (en cm)</label>
+            <input type="number" id="height" formControlName="height" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="weight" class="mb-2">Poids (en kg)</label>
+            <input type="number" id="weight" formControlName="weight" class="p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="gender" class="mb-2">Genre</label>
+            <select id="gender" formControlName="gender" class="p-2 rounded bg-gray-700 outline-none">
+                <option value="male">Male</option>
+                <option value="female">Femelle</option>
+            </select>
+        </div>
+
+        <button type="submit" class="w-full p-2 rounded bg-yellow-600 hover:bg-yellow-500 text-white font-bold">Créer</button>
+    </form>
+</div>
