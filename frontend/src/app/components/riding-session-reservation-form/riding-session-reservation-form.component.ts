@@ -20,11 +20,22 @@ export class RidingSessionReservationFormComponent implements OnInit {
   ridingSessionForm: FormGroup = new FormGroup({});
   showAvailableHorses: boolean = false;
   availableHorses: any = [];
+  protected user: any;
 
   @Input()
   ridingSession: any;
 
   ngOnInit() {
+
+    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData }) => {
+
+      if (isAuthenticated) {
+        this.user = userData;
+      }
+    }
+    );
+
+    console.log(this.ridingSessionsService.getAllRidingSessions());
   
     this.ridingSessionsService.getAvailableHorsesForRidingSession(this.ridingSession.id).subscribe(horses => {
       this.availableHorses = horses;
@@ -50,27 +61,21 @@ export class RidingSessionReservationFormComponent implements OnInit {
       });
 
 
-      this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData }) => {
-        console.log(userData.preferred_username);
 
-        console.log(this.riderService.getAllRiders());
+        var rider = this.riderService.getRiderByPseudo(this.user.preferred_username);
 
+        console.log('Check begin');
 
-        console.log(this.riderService.getRiderByPseudo(userData.preferred_username));
-
-        var rider = this.riderService.getRiderByPseudo(userData.preferred_username);
+        console.log(this.ridingSessionsService.getAllRidingSessions());
 
         this.ridingSession.riders.push(rider);
       
-        console.log(this.ridingSession);
+        console.log(this.ridingSessionsService.getAllRidingSessions());
 
-      });
-      
-      
-      
-      console.log(this.ridingSession);
+        console.log('Check end');
+
       this.ridingSessionsService.updateRidingSession(this.ridingSession);
-      console.log('Riding session updated');
+  
     }
     else {
       console.log('Riding session not updated: invalid form');
@@ -89,4 +94,14 @@ export class RidingSessionReservationFormComponent implements OnInit {
       this.showAvailableHorses = true;
     }
   }
+
+  checkUserIncludeInRidingSession() {
+    if (this.ridingSession.riders.some((rider:any) => rider.pseudo == this.user.preferred_username)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
 }

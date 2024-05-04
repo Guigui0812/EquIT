@@ -21,6 +21,8 @@ export class RidingSessionService {
   }
 
   getAllRidingSessions() {
+
+
     return this.ridingSessionsArray;
   }
 
@@ -43,6 +45,7 @@ export class RidingSessionService {
   updateRidingSession(riderSession: RidingSession) {
 
     console.log(riderSession);
+    console.log(riderSession.id)
     this.httpClient.put(`/api/riding-sessions/${riderSession.id}`, riderSession).subscribe(() => {
       this.refreshRidingSessions();
     });
@@ -57,13 +60,6 @@ export class RidingSessionService {
   getAvailableHorsesForRidingSession(sessionId: number): Observable<any[]> {
     return this.httpClient.get<any[]>(`/api/riding-sessions/${sessionId}/horses`);
   }
-
-  getAvailableSessionForRider(riderName: string){
-
-    // Get all riding sessions where the rider is not already booked and where the number of riders is less than the capacity
-    return this.ridingSessionsArray.filter((ridingSession: any) => {
-      return ridingSession.riders.filter((rider: any) => rider.name === riderName).length === 0 && ridingSession.riders.length < ridingSession.lessonCapacity;
-    });
-  }
+  
 
 }

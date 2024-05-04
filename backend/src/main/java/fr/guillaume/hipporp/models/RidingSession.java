@@ -28,8 +28,12 @@ public class RidingSession {
     @JoinColumn(name = "horse_id", referencedColumnName = "id")
     private List<Horse> horses;
 
-    @OneToMany
-    @JoinColumn(name = "rider_id", referencedColumnName = "id")
+    @ManyToMany
+    @JoinTable(
+            name = "session_rider",
+            joinColumns = @JoinColumn(name = "session_id"),
+            inverseJoinColumns = @JoinColumn(name = "rider_id")
+    )
     private List<Rider> riders;
 
 }

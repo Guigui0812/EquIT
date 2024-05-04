@@ -97,3 +97,5 @@ The binding between the rider and the riding lesson is done using the `keycloak`
 **Riding lesson booking interface :**
 
 ![Riding lesson booking](./readme_assets/session_booking.jpg)
+
+![Riding lesson booking - image 2](./readme_assets/session_booking-2.jpg)

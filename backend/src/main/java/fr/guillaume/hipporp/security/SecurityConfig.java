@@ -19,12 +19,13 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers(HttpMethod.GET, "/riders").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.decoder(jwtDecoder()))
                 );
+
+
 
         return http.build();
         }
@@ -36,4 +37,6 @@ public class SecurityConfig {
     public JwtDecoder jwtDecoder() {
         return JwtDecoders.fromIssuerLocation("http://localhost:8888/realms/hipporp-realm");
     }
+
+
 }
