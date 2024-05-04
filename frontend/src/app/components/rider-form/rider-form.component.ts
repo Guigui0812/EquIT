@@ -4,12 +4,12 @@ import { RiderService } from '../../services/rider.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HorseService } from '../../services/horse.service';
 import { Horse } from '../../models/horse.model';
-import { NgFor, NgForOf, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgForOf, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-rider-form',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, FormsModule, NgForOf, NgIf],
+  imports: [ReactiveFormsModule, HttpClientModule, FormsModule, NgForOf, NgIf, CommonModule],
   templateUrl: './rider-form.component.html',
   styleUrl: './rider-form.component.css'
 })
@@ -19,6 +19,7 @@ export class RiderFormComponent implements OnInit {
   selectedHorses: string[] = [];
   horses: any[] = [];
   availableHorses: any[] = [];
+  errorMessage: string = '';
 
   ngOnInit() {
     this.riderForm = new FormGroup({
@@ -38,7 +39,7 @@ export class RiderFormComponent implements OnInit {
       console.log('Rider created');
     }
     else {
-      console.log('Rider informartions are incorrect');
+      this.errorMessage = 'Please fill in all required fields :' + this.riderForm.errors;
     }
   }
 }

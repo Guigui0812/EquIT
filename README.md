@@ -1,9 +1,10 @@
 # EquiIT - An ERP dedicate to horse riding
 
-**The project is composed of two repositories :**
+**The project is composed of three parts :**
 
-- [This one that contains the frontend and docker-compose file to run the project](https://github.com/Guigui0812/EquIT-frontend)
-- [The other one that contains the backend](https://github.com/Guigui0812/EquiIT-backend)
+- The backend application, a Spring Boot application
+- The frontend application, an Angular application
+- The infrastructure, a docker-compose file to setup mariadb and keycloak (with a dedicated postgres database)
 
 ## How to run the project
 
@@ -89,8 +90,9 @@ Once a riding lesson is created, the riders can book it on the application under
 - The rider has to be logged in
 - The rider has to check a box in order to tell if he has a horse or not
 - If the rider hasn't a horse, he has to choose one in the list of available horses
+- If the rider is already booked in a riding lesson at the same time, he can't book another one
 
-**The rider can only see the riding lessons that are not full and that are not already booked by him. The level feature is not implemented yet.**
+**The level of the rider is not taken into account in the booking process for the moment.**
 
 The binding between the rider and the riding lesson is done using the `keycloak` token. The rider can only book a riding lesson if he is logged in on both the application and the `keycloak` server. The binding is done using the `preferred_username` field in the token : the username of the rider in the application is the same as the username in the `keycloak` server. So, when a user book a riding lesson, the application checks if the `preferred_username` field in the token is the same as the username of the rider in the application and add the rider to the riding lesson if it is the case.
 
@@ -99,3 +101,27 @@ The binding between the rider and the riding lesson is done using the `keycloak`
 ![Riding lesson booking](./readme_assets/session_booking.jpg)
 
 ![Riding lesson booking - image 2](./readme_assets/session_booking-2.jpg)
+
+
+## Default credentials
+
+### Keycloak
+
+- `admin` / `Password123!`
+
+### Fake users
+
+**Admins :**
+
+- `johnmarston2011` / `Password123!`
+- `arthur_morgan` / `Password123!`
+
+**Users :**
+
+- `guigui0812` / `Password123!`
+- `olivier_rohee` / `Password123!`
+- `ines_dlmr` / `Password123!`
+
+**Hope you will enjoy the project !**
+
+*This project is a work in progress and is not finished yet. The features are not fully implemented and the project is not production ready.*

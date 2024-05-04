@@ -4,6 +4,7 @@ import { RidingSessionService } from '../../services/riding-session.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { CommonModule } from '@angular/common';
 
 // Définition du validateur de date future
 function futureDateValidator(): ValidatorFn {
@@ -23,11 +24,13 @@ function futureDateValidator(): ValidatorFn {
 @Component({
   selector: 'app-riding-session-form',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
   templateUrl: './riding-session-form.component.html',
   styleUrls: ['./riding-session-form.component.css']
 })
 export class RidingSessionFormComponent implements OnInit {
+
+  errorMessage: string = ''; 
 
   ridingSessionForm: FormGroup = new FormGroup({});
 
@@ -60,8 +63,7 @@ export class RidingSessionFormComponent implements OnInit {
       this.ridingSessionsService.addRidingSession(this.ridingSessionForm.value);
       console.log('Riding session added');
     } else {
-      console.log('Riding session not added: invalid form');
-      console.error(this.ridingSessionForm.errors);  // affiche les erreurs si le formulaire est invalide
+      this.errorMessage = 'Please fill in all required fields :' + this.ridingSessionForm.errors;
     }
   }
 }

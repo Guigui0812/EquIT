@@ -21,6 +21,7 @@ export class RidingSessionReservationFormComponent implements OnInit {
   showAvailableHorses: boolean = false;
   availableHorses: any = [];
   protected user: any;
+  errorMessage: string = '';  // Stocker les messages d'erreur
 
   @Input()
   ridingSession: any;
@@ -60,29 +61,19 @@ export class RidingSessionReservationFormComponent implements OnInit {
         }
       });
 
-
-
         var rider = this.riderService.getRiderByPseudo(this.user.preferred_username);
 
-        console.log('Check begin');
-
-        console.log(this.ridingSessionsService.getAllRidingSessions());
-
         this.ridingSession.riders.push(rider);
-      
-        console.log(this.ridingSessionsService.getAllRidingSessions());
-
-        console.log('Check end');
 
       this.ridingSessionsService.updateRidingSession(this.ridingSession);
   
     }
     else {
-      console.log('Riding session not updated: invalid form');
+      this.errorMessage = this.ridingSessionForm.errors ? this.ridingSessionForm.errors.toString() : 'Error in form submission';
       console.error(this.ridingSessionForm.errors);
     }
     } else {
-      console.log('Riding session is full or no horses available are available');
+      this.errorMessage = 'No available horses or no more space in the riding session';
     }
   }
 
@@ -103,5 +94,4 @@ export class RidingSessionReservationFormComponent implements OnInit {
       return false;
     }
   }
-
 }

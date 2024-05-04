@@ -1,7 +1,5 @@
 <form [formGroup]="ridingSessionForm" (ngSubmit)="submitForm()" class="flex flex-col p-6 bg-gray-800 text-gray-200 rounded-lg shadow-md space-y-4">
-
   <h2 class="text-yellow-400 font-bold text-xl mb-4">Séance du {{ this.ridingSession.date }}</h2>
-
   <div class="space-y-2">
     <p class="font-semibold">Capacité: {{ this.ridingSession.lessonCapacity }} élèves maximum</p>
     <ul class="list-disc pl-5 space-y-1">
@@ -15,12 +13,17 @@
       <label for="showHorses{{ridingSession.id}}" class="flex-grow">Voir les chevaux disponibles</label>
     </div>
     <select formControlName="horse" [class]="showAvailableHorses ? 'block' : 'hidden'" class="block w-full p-2 rounded bg-gray-700 focus:bg-gray-600 outline-none">
-          <option *ngFor="let horse of this.availableHorses" [value]="horse.id">{{ horse.name }}</option>
+      <option *ngFor="let horse of this.availableHorses" [value]="horse.id">{{ horse.name }}</option>
     </select>
+
   </div>
 
   <div *ngIf="this.checkUserIncludeInRidingSession()" class="text-red-400">
     <p>Vous êtes déjà inscrit à cette séance</p>
+  </div>
+
+  <div *ngIf="errorMessage !== ''" class="text-red-400">
+    <p>{{ errorMessage }}</p>
   </div>
 
   <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline font-bold" *ngIf="!this.checkUserIncludeInRidingSession()">Réserver</button>

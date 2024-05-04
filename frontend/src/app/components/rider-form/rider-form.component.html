@@ -32,6 +32,10 @@
             </select>
         </div>
 
+        <div *ngIf="errorMessage !== ''" class="text-red-400">
+            <p>{{ errorMessage }}</p>
+        </div>
+
         <button type="submit" class="w-full p-2 rounded bg-yellow-600 hover:bg-yellow-500 text-white font-bold">Submit</button>
 
     </form>

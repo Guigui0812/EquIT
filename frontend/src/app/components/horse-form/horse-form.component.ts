@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl } from '@angular/forms';
 import { HorseService } from '../../services/horse.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 // Validateur pour la date de naissance
 function dateOfBirthValidator(): ValidatorFn {
@@ -34,12 +35,13 @@ function weightValidator(): ValidatorFn {
 @Component({
   selector: 'app-horse-form',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
   templateUrl: './horse-form.component.html',
   styleUrls: ['./horse-form.component.css']
 })
 export class HorseFormComponent implements OnInit {
   horseForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(protected horseService: HorseService) {
     this.horseForm = new FormGroup({
@@ -62,7 +64,7 @@ export class HorseFormComponent implements OnInit {
       this.horseService.addHorse(this.horseForm.value);
       console.log('Horse created');
     } else {
-      console.error('Horse information is incorrect', this.horseForm.errors);
+      this.errorMessage = 'Please fill in all required fields :' + this.horseForm.errors;
     }
   }
 }
