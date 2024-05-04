@@ -20,6 +20,7 @@
 2. Setup the infrastructure with docker-compose
     - Go to the frontend repository
     - `cd infra` and `docker-compose up -d`
+    - Import the database `hipporp-database.json` (the file is in the `infra` folder) into `mariaDB`
 3. Import the realm in Keycloak
     - Go to `localhost:8888`
     - Login with `admin` and `Password123`
