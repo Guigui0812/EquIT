@@ -16,16 +16,20 @@
 
 ### Steps
 
-1. Clone the two repositories in the same folder
+1. Clone the repository
 2. Setup the infrastructure with docker-compose
     - Go to the frontend repository
     - `cd infra` and `docker-compose up -d`
-3. Run the backend application
+3. Import the realm in Keycloak
+    - Go to `localhost:8888`
+    - Login with `admin` and `Password123`
+    - Import the realm `hipporp-realm.json` (the file is in the `infra` folder)
+4. Run the backend application
     - Go to IntelliJ IDEA
     - Open the backend project
     - Run the application
     - The backend is running on `localhost:8080`
-4. Run the frontend application
+5. Run the frontend application
     - Go to the frontend repository
     - `npm install`
     - `npm start`
